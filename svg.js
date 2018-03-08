@@ -12,33 +12,30 @@ var drawDot = function(xc,yc,rad){
     var dot = {
 	cl : document.createElementNS(
 	    "http://www.w3.org/2000/svg",
-	    "circle"
-	),
-	addThis: function(){
-	    pic.appendChild(this.cl);
-	},
-	change: function(e){
-	    if( this.getAttribute("fill") == "pink" ){
-		this.setAttribute("fill","red");
-	    }
-	    if (this.getAttribute("fill") == "red") {
-		pic.removeChild(this);
-		xc = Math.random()*500;
-		yc = Math.random()*500;
-		drawDot(xc,yc,50);
-	    }
-	    e.stopPropagation();
-	}
+	    "circle"),
 	
+	change: function(e){
+	    if (this.getAttribute("fill") == "pink"){
+	    this.setAttribute("fill", "red");
+	    }
+	    else{
+		xc = Math.random() * 500;
+		yc = Math.random() * 500;
+		drawDot(xc,yc,50);
+		this.remove();
+	    }
+	}
     }
-    dot.cl.setAttribute("cx", xc);
-    dot.cl.setAttribute("cy", yc);
-    dot.cl.setAttribute("r",rad);
-    dot.cl.setAttribute("fill","pink");
-    dot.cl.setAttribute("stroke","black");
-    dot.cl.addEventListener("click",dot.change);
-    pic.appendChild(dot.cl)
+	dot.cl.setAttribute("cx", xc);
+	dot.cl.setAttribute("cy", yc);
+	dot.cl.setAttribute("r",rad);
+	dot.cl.setAttribute("fill","pink");
+	dot.cl.setAttribute("stroke","black");
+	dot.cl.addEventListener("click",dot.change);
+	pic.appendChild(dot.cl)
 }
+
+
 
 var clear = function(e){
     pic.innerHTML="";   

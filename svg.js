@@ -3,7 +3,7 @@ var pic = document.getElementById("vimage");
 var clicked = function(e){
     if (e.toElement == this){
         var d0t = drawDot(e.offsetX, e.offsetY, 50 );
-	//d0t.addThis();
+	//d0t.display();
 	e.stopPropagation();
     }
 }
@@ -14,25 +14,34 @@ var drawDot = function(xc,yc,rad){
 	    "http://www.w3.org/2000/svg",
 	    "circle"),
 	
+	cors: function(xc,yc){
+	    this.setAttribute("cx", xc);
+	    this.setAttribute("cy", yc);
+	},
+	
+	color: function(color){
+	    this.setAttribute("fill",color)
+	},
+	
 	change: function(e){
 	    if (this.getAttribute("fill") == "pink"){
-	    this.setAttribute("fill", "red");
+		this.color("red");
 	    }
 	    else{
-		xc = Math.random() * 500;
-		yc = Math.random() * 500;
-		drawDot(xc,yc,50);
-		this.remove();
+		//when dot is red, change to pink and move the dot somewhere else
+		this.cors(Math.random*500, Math.random*500);
+		this.color("pink");		
 	    }
+	},
+	
+	display: function(e){
+	    pic.appendChild(this);
 	}
     }
-	dot.cl.setAttribute("cx", xc);
-	dot.cl.setAttribute("cy", yc);
-	dot.cl.setAttribute("r",rad);
-	dot.cl.setAttribute("fill","pink");
-	dot.cl.setAttribute("stroke","black");
-	dot.cl.addEventListener("click",dot.change);
-	pic.appendChild(dot.cl)
+    dot.cl.cors(xc,yc);
+    dot.cl.color("pink");
+    dot.cl.display();
+    return dot.cl
 }
 
 

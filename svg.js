@@ -15,16 +15,17 @@ var drawDot = function(xc,yc,rad){
 	    "circle"),
 	
 	cors: function(xc,yc){
-	    this.setAttribute("cx", xc);
-	    this.setAttribute("cy", yc);
+	    this.cl.setAttribute("cx", xc);
+	    this.cl.setAttribute("cy", yc);
+	    this.cl.setAttribute("r", rad);
 	},
 	
 	color: function(color){
-	    this.setAttribute("fill",color)
+	    this.cl.setAttribute("fill",color)
 	},
 	
 	change: function(e){
-	    if (this.getAttribute("fill") == "pink"){
+	    if (this.cl.getAttribute("fill") == "pink"){
 		this.color("red");
 	    }
 	    else{
@@ -35,12 +36,13 @@ var drawDot = function(xc,yc,rad){
 	},
 	
 	display: function(e){
-	    pic.appendChild(this);
+	    pic.appendChild(this.cl);
 	}
     }
-    dot.cl.cors(xc,yc);
-    dot.cl.color("pink");
-    dot.cl.display();
+    dot.cl.addEventListener("click", dot.change);
+    dot.cors(xc,yc);
+    dot.color("pink");
+    dot.display();
     return dot.cl
 }
 
